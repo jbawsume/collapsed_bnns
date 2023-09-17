@@ -13,7 +13,7 @@ import torchvision
 from alg import cmfvi
 from fit import fit, DL
 
-from .custom_dataset_loader import StateFarmDataset
+from custom_dataset_loader import StateFarmDataset
 
 logging.basicConfig(
     format="[%(asctime)s, %(levelname)s] %(message)s",
