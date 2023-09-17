@@ -40,9 +40,9 @@ def train_vectorized_mnist(config):
                           nn.LogSoftmax(dim=-1))
 
     def get_data(download):
-        transform = transforms.Compose(
-                    [transforms.ToPILImage(),
-                        transforms.Resize(128),transforms.ToTensor()
+        transform = T.Compose(
+                    [T.ToPILImage(),
+                        T.Resize(128),T.ToTensor()
                     ])
         statefarm_dataset = StateFarmDataset(csv_file='/root/driver_imgs_list.csv', root_dir='/root/imgs/train',
                                                                 transform=transform)
