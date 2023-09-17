@@ -32,25 +32,25 @@ def fully_connected(in_dim, out_dim, num_layers, size):
 
 
 def train_vectorized_mnist(config):
-        model = fully_connected(in_dim=784,
-                                out_dim=10,
-                                num_layers=config.num_hidden_layers,
-                                size=config.num_hidden_units)
-        model = nn.Sequential(model,
-                            nn.LogSoftmax(dim=-1))
+    model = fully_connected(in_dim=784,
+                            out_dim=10,
+                            num_layers=config.num_hidden_layers,
+                            size=config.num_hidden_units)
+    model = nn.Sequential(model,
+                          nn.LogSoftmax(dim=-1))
 
-        def get_data(download):
-            transform = transforms.Compose(
+    def get_data(download):
+        transform = transforms.Compose(
                     [transforms.ToPILImage(),
                         transforms.Resize(128),transforms.ToTensor()
                     ])
-            statefarm_dataset = StateFarmDataset(csv_file='/root/driver_imgs_list.csv', root_dir='/root/imgs/train',
+        statefarm_dataset = StateFarmDataset(csv_file='/root/driver_imgs_list.csv', root_dir='/root/imgs/train',
                                                                 transform=transform)
-            train_length=int(0.7* len(statefarm_dataset))
-            test_length=len(statefarm_dataset)-train_length
-            train_data,test_data = torch.utils.data.random_split(statefarm_dataset,(train_length,test_length))
+        train_length=int(0.7* len(statefarm_dataset))
+        test_length=len(statefarm_dataset)-train_length
+        train_data,test_data = torch.utils.data.random_split(statefarm_dataset,(train_length,test_length))
 
-            return train_data, test_data
+        return train_data, test_data
     
     train_data, test_data = get_data(download=True)
 
