@@ -63,7 +63,7 @@ def train_vectorized_mnist(config):
     x_test = (test_data.data / 255. - 0.5).mul(2).view(num_test_data, -1)
 
 
-    data =  (train_dl=DL(x,
+    data = SimpleNamespace(train_dl=DL(x,
                                        train_data.targets,
                                        config.batch_size,
                                        device = config.device),
