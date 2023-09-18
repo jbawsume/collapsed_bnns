@@ -49,7 +49,7 @@ def train_vectorized_mnist(config):
                                                                 transform=transform)
         train_length=int(0.7* len(statefarm_dataset))
         test_length=len(statefarm_dataset)-train_length
-        train_data,test_data = torch.utils.data.random_split(statefarm_dataset,(train_length,test_length))
+        train_dataset,test_dataset = torch.utils.data.random_split(statefarm_dataset,(train_length,test_length))
         train_data = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_works)
         test_data = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_works)
         return train_data, test_data
