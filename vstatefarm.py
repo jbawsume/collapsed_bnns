@@ -55,20 +55,21 @@ def train_vectorized_mnist(config):
         return train_data, test_data
     
     train_data, test_data = get_data(download=True)
+    train_features, train_labels = next(iter(train_data))
+    test_features, test_labels = next(iter(test_data))
+    num_data = len(train_features)
+    num_test_data = len(test_features)
 
-    num_data = len(train_data.data)
-    num_test_data = len(test_data.data)
-
-    x = (train_data.data / 255. - 0.5).mul(2).view(num_data, -1)
-    x_test = (test_data.data / 255. - 0.5).mul(2).view(num_test_data, -1)
+    x = (train_features / 255. - 0.5).mul(2).view(num_data, -1)
+    x_test = (test_features / 255. - 0.5).mul(2).view(num_test_data, -1)
 
 
     data = SimpleNamespace(train_dl=DL(x,
-                                       train_data.targets,
+                                       train_labels,
                                        config.batch_size,
                                        device = config.device),
                            valid_dl=DL(x_test,
-                                       test_data.targets,
+                                       test_labels,
                                        config.test_batch_size,
                                        device = config.device)
                            )
