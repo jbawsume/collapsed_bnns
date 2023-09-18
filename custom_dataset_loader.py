@@ -25,7 +25,7 @@ class StateFarmDataset(Dataset):
             data_norm_mean, data_norm_std = (0.5, 0.5, 0.5), (0.5, 0.5, 0.5)
             transform = torchvision.transforms.Compose([
                 torchvision.transforms.ToPILImage(),
-                torchvision.transforms.Resize(32), #32 for resnet  #128 for linear #64 for conv
+                torchvision.transforms.Resize(48), #32 for resnet  #128 for linear #64 for conv
                 torchvision.transforms.ToTensor(),
                 torchvision.transforms.Lambda(lambda x: torch.flatten(x))
                 #torchvision.transforms.transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
