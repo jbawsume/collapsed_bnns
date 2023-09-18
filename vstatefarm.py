@@ -33,7 +33,7 @@ def fully_connected(in_dim, out_dim, num_layers, size):
 
 
 def train_vectorized_mnist(config):
-    model = fully_connected(in_dim=784,
+    model = fully_connected(in_dim=9216,
                             out_dim=10,
                             num_layers=config.num_hidden_layers,
                             size=config.num_hidden_units)
