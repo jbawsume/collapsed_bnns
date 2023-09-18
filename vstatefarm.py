@@ -9,6 +9,7 @@ from torch import nn
 from torch.nn import functional as F
 from torchvision import transforms as T
 import torchvision
+from torch.utils.data import DataLoader
 
 from alg import cmfvi
 from fit import fit, DL
@@ -49,7 +50,8 @@ def train_vectorized_mnist(config):
         train_length=int(0.7* len(statefarm_dataset))
         test_length=len(statefarm_dataset)-train_length
         train_data,test_data = torch.utils.data.random_split(statefarm_dataset,(train_length,test_length))
-
+        train_data = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_works)
+        test_data = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_works)
         return train_data, test_data
     
     train_data, test_data = get_data(download=True)
@@ -61,7 +63,7 @@ def train_vectorized_mnist(config):
     x_test = (test_data.data / 255. - 0.5).mul(2).view(num_test_data, -1)
 
 
-    data = SimpleNamespace(train_dl=DL(x,
+    data =  (train_dl=DL(x,
                                        train_data.targets,
                                        config.batch_size,
                                        device = config.device),
